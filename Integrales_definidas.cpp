@@ -28,7 +28,7 @@ int main()
 	for (int i = tam_rect_arreglo; i<=largo; i += tam_rect_arreglo) {
 		
 		//acá se va a hacer la magia :D
-		float* mas_grande = std::max_element(&valores_funcion[i-50],&valores_funcion[i]);
+		float* mas_grande = std::max_element(&valores_funcion[i-tam_rect_arreglo],&valores_funcion[i]);
 		resultado += *mas_grande * tamaño_rectangulo;
 		
 
