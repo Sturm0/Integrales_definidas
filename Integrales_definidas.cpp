@@ -8,12 +8,12 @@ double funcion(double x) {
 
 int main()
 {
-	double borde_inferior = 5.0;
-	double borde_superior = 50.0;
+	double borde_inferior = 0.0;
+	double borde_superior = 10.0;
 	double paso = .001; // determina el espacio entre cada valor de "y" tomado
-	double tamaño_rectangulo = (borde_superior-borde_inferior)/1000; // determina la base del rectangulo
+	double tamano_rectangulo = (borde_superior-borde_inferior)/1000; // determina la base del rectangulo
 
-	int tam_rect_arreglo = tamaño_rectangulo/paso; // es el tamaño en posiciones del arreglo que tiene la base del rectangulo
+	int tam_rect_arreglo = tamano_rectangulo/paso; // es el tamano en posiciones del arreglo que tiene la base del rectangulo
 	int largo = (borde_superior-borde_inferior)/paso;
 	double valores_funcion[largo];
 	double val_x = borde_inferior;
@@ -30,7 +30,7 @@ int main()
 		
 		//acá se va a hacer la magia :D
 		double* mas_grande = std::max_element(&valores_funcion[i-tam_rect_arreglo],&valores_funcion[i]);
-		resultado += *mas_grande * tamaño_rectangulo;
+		resultado += *mas_grande * tamano_rectangulo;
 		
 
 	}
