@@ -9,30 +9,32 @@ double funcion(double x) {
 int main()
 {
 	double borde_inferior = 0.0;
-	double borde_superior = 10.0;
+	double borde_superior = 100000.0;
 	double paso = .001; // determina el espacio entre cada valor de "y" tomado
 	double tamano_rectangulo = (borde_superior-borde_inferior)/1000; // determina la base del rectangulo
 
 	int tam_rect_arreglo = tamano_rectangulo/paso; // es el tamano en posiciones del arreglo que tiene la base del rectangulo
-	int largo = (borde_superior-borde_inferior)/paso;
-	double valores_funcion[largo];
-	double val_x = borde_inferior;
-
-	for (int i = 0; i<largo; i++) {
-		//este for se encarga de poblar la lista con valores de la función
-		valores_funcion[i] = funcion(val_x);
-		val_x += paso;
-	}
 	
-
+	double valores_funcion[tam_rect_arreglo];
+	double val_x = borde_inferior;
+	int seccion = 0; //para evitar utilizar demasiada memoria la idea es que cree el arreglo de valores de la funcion para el primer rectangulo, calcule el maximo, sume al resultado y así sucesivamente
 	double resultado = 0;
-	for (int i = tam_rect_arreglo; i<=largo; i += tam_rect_arreglo) {
-		
-		//acá se va a hacer la magia :D
-		double* mas_grande = std::max_element(&valores_funcion[i-tam_rect_arreglo],&valores_funcion[i]);
-		resultado += *mas_grande * tamano_rectangulo;
-		
 
+	//los ultimos cambios son un esbozo, continuar de dicho esbozo para hacer que funcione
+	int contador_extrano = 0;
+	while (seccion< borde_superior/paso) {
+		//std::cout << "Sección num: "<< contador_extrano << std::endl;
+		for (int i = 0; i<tam_rect_arreglo; i++) {
+			//este for se encarga de poblar la lista con valores de la función
+			valores_funcion[i] = funcion(val_x);
+			val_x += paso;
+		}
+		double* mas_grande = std::max_element(valores_funcion,&valores_funcion[tam_rect_arreglo]);
+		resultado += *mas_grande * tamano_rectangulo;
+
+		seccion += tam_rect_arreglo;
+		contador_extrano++;
 	}
-	std::cout << resultado << std::endl;	
+	std::cout << resultado << std::endl;
+	std::cout << "Sección num: "<< contador_extrano << std::endl;	
 }
