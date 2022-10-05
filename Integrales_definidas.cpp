@@ -9,17 +9,24 @@ double funcion(double x) {
 int main()
 {
 	double borde_inferior = 0.0;
-	double borde_superior = 115000.0;
+	double borde_superior = 15.0;
 	double paso = .001; // determina el espacio entre cada valor de "y" tomado
-	double tamano_rectangulo = (borde_superior-borde_inferior)/1000; // determina la base del rectangulo
-
-	int tam_rect_arreglo = tamano_rectangulo/paso; // es el tamano en posiciones del arreglo que tiene la base del rectangulo
-	
-	double valores_funcion[tam_rect_arreglo];
+	//double tamano_rectangulo = (borde_superior-borde_inferior)/1000; // determina la base del rectangulo
+	double tamano_rectangulo = 0; // determina la base del rectangulo, si se pone 0 significa que el propio programa se encargar de elegir uno que parezca adecuado, pero el usuario lo puede cambiar según su preferencia
 	double val_x = borde_inferior;
 	int seccion = 0; //para evitar utilizar demasiada memoria la idea es que cree el arreglo de valores de la funcion para el primer rectangulo, calcule el maximo, sume al resultado y así sucesivamente
 	double resultado = 0;
 
+	if (tamano_rectangulo == 0) {
+		if (borde_superior < 10000) {
+			tamano_rectangulo = borde_superior/1000;
+		} else {
+			tamano_rectangulo = 200;
+		}
+	}
+	int tam_rect_arreglo = tamano_rectangulo/paso; // es el tamano en posiciones del arreglo que tiene la base del rectangulo
+	double valores_funcion[tam_rect_arreglo];
+	
 	while (seccion< borde_superior/paso) {
 		for (int i = 0; i<tam_rect_arreglo; i++) {
 			//este for se encarga de poblar la lista con valores de la función
